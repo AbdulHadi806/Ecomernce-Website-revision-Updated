@@ -1,0 +1,1 @@
+export const GLOBAL_VARIABLE_API = "https://api.escuelajs.co/api/v1"
