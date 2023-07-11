@@ -9,7 +9,7 @@ function Expensetracker() {
     );
   return (
     <div className='mx-auto flex align-center shadow-lg shadow-[rgba(0, 0, 0, 0.2)] p-[15px] mb-[20px] h-[100px] border-2 border-[#807373] rounded w-[280px] bg-white'>
-      <span><span className='font-semibold'>Total Price:</span> {totalPriceCounter}</span>
+      <span><span className='font-semibold'>Total Price:</span> {totalPriceCounter} USD</span>
     </div>
   )
 }
