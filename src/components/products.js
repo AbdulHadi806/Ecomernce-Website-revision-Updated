@@ -16,7 +16,6 @@ function Products({ setParamID, paramID }) {
   if (isLoading) {
     return <h2>Loading Data...</h2>;
   }
-
   if (isError) {
     return <h2>Error</h2>;
   }
