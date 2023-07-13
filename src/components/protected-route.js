@@ -6,7 +6,6 @@ function Protectedroute() {
     const productItem =  useSelector(state => state.ProductDetails)
     const navigate = useNavigate()
     const productItemLength = productItem.length <= 0
-    console.log(productItem, "at protected router")
     useEffect(()=> {
         if(productItemLength) {
             return navigate('/', { replace: true })

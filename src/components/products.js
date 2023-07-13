@@ -1,40 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToCart } from '../redux/action';
 import { Link } from 'react-router-dom';
 import ReusableCard from './reusable-card';
-function Products({setParamID, paramID}) {
-    const productData = useSelector(state => state.ShopItems)
-    const dispatch = useDispatch()
-    const productDetailsHandler = (item) => {
-        setParamID(item.id)
-    }
-    const addToCartHandler = (item) => {
-        dispatch(addToCart(item))
-    }
+import { useGetAllProductsQuery } from '../redux/apiCalls/productApi';
+import { addToCartIDHandler } from '../redux/slice/cartslice';
 
-    let productDataUpdated;
-    const shortenString = (array, property) => {
-        array.forEach(obj => {
-          if (obj[property].length > 40) {
-            obj[property] = obj[property].substring(0, 40) + '...';
-          }
-        });
-        productDataUpdated = array
-        return productDataUpdated
-      }
-        shortenString(productData, "title")
-    return (
-        <div class="flex justify-between flex-wrap gap-[15px] py-[30px]">
-            {productDataUpdated.map((item) => {
-                return (
-                 (
-                    <ReusableCard addToCartHandler={addToCartHandler} item = {item}/>
-                 )
-                )
-            })}
-        </div>
-    )
+function Products({ setParamID, paramID }) {
+  const { data, isError, isLoading } = useGetAllProductsQuery();
+  const dispatch = useDispatch();
+
+  const addToCartHandler = (item) => {
+    dispatch(addToCartIDHandler(item))
+  };
+
+  if (isLoading) {
+    return <h2>Loading Data...</h2>;
+  }
+
+  if (isError) {
+    return <h2>Error</h2>;
+  }
+
+  return (
+    <div className="flex justify-between flex-wrap gap-[15px] py-[30px]"> {/* Updated class to className */}
+
+      {data.map((item) => (
+        <ReusableCard
+          key={item.id} // Add a unique key prop
+          addToCartHandler={addToCartHandler}
+          item={item}
+        />
+      ))}
+    </div>
+  );
 }
 
-export default Products
+export default Products;

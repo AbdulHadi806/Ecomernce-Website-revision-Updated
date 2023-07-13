@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 function Expensetracker() {
-    const CartItems = useSelector(state => state.CartPage)
+    const CartItems = useSelector(state => state.cartSlice.CartItems); 
     const totalPriceCounter = CartItems.reduce(
       (aucc, curr) => aucc + curr.price * curr.count,
       0
